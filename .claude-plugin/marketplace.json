@@ -37,6 +37,16 @@
       "name": "godspeed-tasks",
       "description": "Manage Godspeed tasks via CLI, HTTP API, or SQLite. Query, create, update tasks with full API reference.",
       "path": "skills/godspeed-tasks"
+    },
+    {
+      "name": "work-principles",
+      "description": "Ray Dalio's Work Principles framework. Idea meritocracy, believability-weighted decisions, organization as machine.",
+      "path": "skills/work-principles"
+    },
+    {
+      "name": "architecture-as-code",
+      "description": "Build and maintain architecture knowledge bases for complex multi-repo systems. Bootstrap, discovery, cross-skill integration.",
+      "path": "skills/architecture-as-code"
     }
   ]
 }
