@@ -7,6 +7,11 @@
       "name": "content-processor",
       "description": "Process any content source (YouTube, websites, EPUBs, markdown) into structured summaries",
       "path": "skills/content-processor"
+    },
+    {
+      "name": "skill-builder",
+      "description": "Interactive guide for creating and maintaining high-quality Claude skills. Use when creating, updating, or refactoring skills.",
+      "path": "skills/skill-builder"
     }
   ]
 }

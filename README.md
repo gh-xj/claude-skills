@@ -7,7 +7,7 @@ A collection of productivity skills for Claude Code.
 Add this marketplace to Claude Code:
 
 ```bash
-/plugin marketplace add YOUR_USERNAME/claude-skills
+/plugin marketplace add gh-xj/claude-skills
 ```
 
 ## Available Skills
@@ -23,6 +23,18 @@ Process any content source (YouTube, websites, EPUBs, markdown) into structured 
 - Website content fetching
 - EPUB to markdown conversion
 - Batch content summarization
+
+### skill-builder
+
+Interactive guide for creating and maintaining high-quality Claude skills.
+
+**Usage:** `/skill-builder`
+
+**Features:**
+- Create new skills with proper structure
+- Refactor existing skills for better organization
+- Progressive disclosure patterns
+- Quality checklists and best practices
 
 ## Adding More Skills
 
