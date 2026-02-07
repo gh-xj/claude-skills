@@ -1,0 +1,27 @@
+version: "3"
+
+vars:
+  BIN: "{{.ROOT_DIR}}/bin/godspeed"
+
+tasks:
+  build:
+    internal: true
+    dir: scripts
+    sources:
+      - "*.go"
+      - go.mod
+      - go.sum
+    generates:
+      - "{{.BIN}}"
+    cmds:
+      - mkdir -p {{.ROOT_DIR}}/bin
+      - go build -o {{.BIN}} .
+    method: checksum
+    silent: true
+
+  run:
+    desc: Run godspeed CLI (e.g., task run -- stats)
+    deps: [build]
+    cmds:
+      - "{{.BIN}} {{.CLI_ARGS}}"
+    silent: true

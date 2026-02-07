@@ -32,6 +32,11 @@
       "name": "timing-analyzer",
       "description": "Query and analyze personal time tracking data from Timing.app. Daily/weekly reports, productivity insights, cognitive analysis.",
       "path": "skills/timing-analyzer"
+    },
+    {
+      "name": "godspeed-tasks",
+      "description": "Manage Godspeed tasks via CLI, HTTP API, or SQLite. Query, create, update tasks with full API reference.",
+      "path": "skills/godspeed-tasks"
     }
   ]
 }
