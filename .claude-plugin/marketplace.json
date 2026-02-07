@@ -12,6 +12,21 @@
       "name": "skill-builder",
       "description": "Interactive guide for creating and maintaining high-quality Claude skills. Use when creating, updating, or refactoring skills.",
       "path": "skills/skill-builder"
+    },
+    {
+      "name": "doc-optimizer",
+      "description": "Optimizes markdown documentation for token efficiency and clarity. Reduces duplication, improves structure.",
+      "path": "skills/doc-optimizer"
+    },
+    {
+      "name": "study-assistant",
+      "description": "Personal study assistant for courses and learning materials. Helps with lectures, course content, and notes.",
+      "path": "skills/study-assistant"
+    },
+    {
+      "name": "go-script-style",
+      "description": "Go CLI script writing conventions and patterns. Use when creating Go automation scripts or CLI tools.",
+      "path": "skills/go-script-style"
     }
   ]
 }
