@@ -1,0 +1,12 @@
+{
+  "name": "Claude Skills",
+  "description": "A collection of productivity skills for Claude Code",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "content-processor",
+      "description": "Process any content source (YouTube, websites, EPUBs, markdown) into structured summaries",
+      "path": "skills/content-processor"
+    }
+  ]
+}

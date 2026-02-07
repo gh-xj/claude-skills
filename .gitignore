@@ -1,0 +1,8 @@
+# Compiled binaries - users should compile locally
+.claude-plugin/skills/*/scripts/bin/
+
+# Task runner cache
+.task/
+
+# OS files
+.DS_Store
