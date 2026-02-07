@@ -57,6 +57,11 @@
       "name": "session-recap",
       "description": "Generate token-efficient session summaries. Tasks completed, files changed, decisions, learnings, pending items.",
       "path": "skills/session-recap"
+    },
+    {
+      "name": "knowledge-base-builder",
+      "description": "Build token-efficient AI knowledge bases from PDFs, EPUBs, docs. Chapter splitting, parallel summarization, optimization.",
+      "path": "skills/knowledge-base-builder"
     }
   ]
 }
