@@ -52,6 +52,11 @@
       "name": "personal-evolution",
       "description": "Learn from pain, make decisions, extract principles. Dalio's Principles + structured lesson capture. Pain→Reflection→Progress.",
       "path": "skills/personal-evolution"
+    },
+    {
+      "name": "session-recap",
+      "description": "Generate token-efficient session summaries. Tasks completed, files changed, decisions, learnings, pending items.",
+      "path": "skills/session-recap"
     }
   ]
 }
