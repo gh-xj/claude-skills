@@ -83,7 +83,7 @@ skill-name/
 
 **Rules:**
 
-- Keep references **one level deep** from SKILL.md
+- Keep references **one or two levels deep** from SKILL.md (e.g., `references/apis/schema.md` is fine when grouping by concern)
 - For files >100 lines, include table of contents at top
 - Scripts must be **tested** before finalizing
 
@@ -136,18 +136,52 @@ For simple edits, modify XML directly.
 - **OOXML details**: See `references/ooxml.md`
 ```
 
+### Pattern 4: SKILL.md as Router
+
+For complex skills, make SKILL.md a pure routing table — no inline knowledge, just categorized pointers:
+
+```markdown
+## References
+
+### Workflows
+| File | Content |
+|------|---------|
+| `references/workflows/investigation.md` | FN/FP investigation |
+| `references/workflows/qa.md` | Category QA workflow |
+
+### APIs
+| File | Content |
+|------|---------|
+| `references/apis/event-log.md` | ES event log schema + queries |
+| `references/apis/metadata.md` | MongoDB metadata API |
+
+### Cross-Skill (from other-skill global skill)
+| Question | Go To |
+|----------|-------|
+| "What are the pipeline phases?" | `other-skill` > `references/core/pipeline.md` |
+```
+
+Organizes by **concern** (workflows, APIs, knowledge, config), not just user intent. SKILL.md stays small, Claude loads only the relevant reference file.
+
 ---
 
 ## Creating a New Skill
 
-### Step 1: Gather Requirements
+### Step 1: Define Skill Goal (SMART)
 
-Ask:
+| Criteria | Question |
+|----------|----------|
+| **Specific** | What exact problem does this solve? |
+| **Measurable** | How do we know the skill is working? |
+| **Achievable** | Can Claude actually do this reliably? |
+| **Relevant** | Does this need a skill, or just a prompt? |
+| **Time-bound** | When should skill trigger vs. not? |
 
-1. What problem does this skill solve?
-2. When should Claude invoke it?
-3. What are the key workflows?
-4. Personal (`~/.claude/skills/`) or project (`.claude/skills/`)?
+Also determine:
+- Key workflows needed
+- Personal (`~/.claude/skills/`) or project (`.claude/skills/`)?
+
+**Red flag**: If you can't answer these clearly, the skill scope is unclear. Clarify before building.
 
 ### Step 2: Craft the Description
 
@@ -265,6 +299,18 @@ references/
 └── orchestration.md  # Sub-agent rules
 ```
 
+---
+
+## Multi-Skill Architecture
+
+For cross-repo systems with multiple skills, see `references/multi-skill-architecture.md`. Covers:
+- **Canonical core pattern** — shared concepts in upstream `core/`, back-referenced by downstream skills
+- **Source file indexes** — `## Source Files` tables with `file:line` pointers in each reference file
+- **Versioned detection config** — date-stamped snapshots of external system configs (rule engines, LLM prompts) in git
+- **Self-healing instructions** — drift detection and auto-update directives in SKILL.md
+
+---
+
 ### Anti-Patterns to Avoid
 
 | Anti-Pattern             | Problem                          | Solution                               |
@@ -273,7 +319,7 @@ references/
 | Repeated tables          | Same info in multiple places     | Single reference table                 |
 | Date-prefixed sections   | Focus on when, not what          | Organize by topic, not timeline        |
 | Verbose explanations     | Hard to scan                     | Tables, bullets, code blocks           |
-| Deeply nested references | Hard to navigate                 | Keep one level deep                    |
+| Deeply nested references | Hard to navigate                 | Max two levels, organized by concern   |
 
 ### Example: Consolidating Session Knowledge
 
@@ -327,10 +373,97 @@ Before finalizing:
 - [ ] Tables used for repetitive data
 - [ ] Single source of truth for each fact
 - [ ] Description states WHAT and WHEN (all triggers)
-- [ ] References one level deep, explicitly linked
+- [ ] References explicitly linked from SKILL.md
 - [ ] Scripts tested and working
 - [ ] Workflows are actionable and complete
 - [ ] Config, formats, orchestration extracted to references (if >200 lines)
+- [ ] **No stale cross-references** (grep for old filenames after any rename/restructure)
+- [ ] **Facts verified against source code** (not just copied from previous skill versions)
+
+---
+
+## Skill Validation
+
+After creating/updating, test before shipping:
+
+| Check | Method |
+|-------|--------|
+| Triggers correctly | Test 3-5 queries that SHOULD activate |
+| Doesn't over-trigger | Test 3-5 queries that should NOT activate |
+| References load | Verify explicit `See references/x.md` links work |
+| Workflows complete | Walk through each workflow end-to-end |
+| Edge cases | Test unusual inputs, empty states |
+
+### Post-Refactor Sweep
+
+After renaming or restructuring files, run:
+1. Grep all `.md` files for old filenames — every hit is a stale reference
+2. Verify back-references to other skills point to files that actually exist
+3. If skills have cross-references, check both directions
+
+**Reflection loop**: Create → Test → Fix → Re-test until solid.
+
+If validation fails, iterate—don't ship broken skills.
+
+---
+
+## Skill Boundaries
+
+Define what skill should NOT do. Include in SKILL.md:
+
+### Scope Limits
+
+```markdown
+## Out of Scope
+- [Thing this skill doesn't handle]
+- [Adjacent task that needs different skill]
+```
+
+### Guardrail Patterns
+
+| Guardrail | When to Use |
+|-----------|-------------|
+| Explicit scope | Skill could be confused with similar tasks |
+| Confirmation prompts | Destructive or irreversible operations |
+| Escalation path | When to ask user vs. proceed autonomously |
+| Fallback behavior | What to do when uncertain |
+
+### Example
+
+```markdown
+## Boundaries
+- This skill creates/edits skills, NOT executes them
+- For skill deletion, confirm with user first
+- If requirements unclear, ask—don't guess
+```
+
+---
+
+## Skill Health Indicators
+
+Track informally over time:
+
+| Metric | Healthy | Unhealthy |
+|--------|---------|-----------|
+| Activation accuracy | Triggers when expected | False positives/negatives |
+| Workflow completion | Users finish tasks | Abandoned mid-workflow |
+| Reference usage | References actually read | Never accessed |
+| Update frequency | Periodic refinement | Stale >6 months |
+
+### Metadata (optional)
+
+Add to SKILL.md frontmatter:
+
+```yaml
+---
+name: skill-name
+description: ...
+version: 1.2
+last_updated: 2026-02-01
+---
+```
+
+Helps track changes and identify stale skills.
 
 ---
 
