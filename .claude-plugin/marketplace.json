@@ -27,6 +27,11 @@
       "name": "go-script-style",
       "description": "Go CLI script writing conventions and patterns. Use when creating Go automation scripts or CLI tools.",
       "path": "skills/go-script-style"
+    },
+    {
+      "name": "timing-analyzer",
+      "description": "Query and analyze personal time tracking data from Timing.app. Daily/weekly reports, productivity insights, cognitive analysis.",
+      "path": "skills/timing-analyzer"
     }
   ]
 }
