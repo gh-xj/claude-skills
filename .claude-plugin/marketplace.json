@@ -47,6 +47,11 @@
       "name": "architecture-as-code",
       "description": "Build and maintain architecture knowledge bases for complex multi-repo systems. Bootstrap, discovery, cross-skill integration.",
       "path": "skills/architecture-as-code"
+    },
+    {
+      "name": "personal-evolution",
+      "description": "Learn from pain, make decisions, extract principles. Dalio's Principles + structured lesson capture. Pain→Reflection→Progress.",
+      "path": "skills/personal-evolution"
     }
   ]
 }
